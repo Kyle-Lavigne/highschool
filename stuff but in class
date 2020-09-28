@@ -1,0 +1,84 @@
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+class Difficulty{
+    public:
+    int x,s=0,st=0,t;
+    int playerCount, dv;
+    int stageResults(int dv, int playerCount){
+        switch(dv){
+            case 3:
+            do{
+                x=rand()%100+1;
+                if(x>40){
+                    s++;
+                    t=rand()%10+5;
+                    st+=t;
+                }
+            }while(x>40);
+            break;
+            case 2:
+            do{
+                x=rand()%100+1;
+                if(x>30){
+                    s++;
+                    t=rand()%10+5;
+                    st+=t;
+                }
+            }while(x>30);
+            break;
+            case 1:
+            do{
+                x=rand()%100+1;
+                if(x>20){
+                    s++;
+                    t=rand()%10+5;
+                    st+=t;
+                }
+            }while(x>20);
+            break;
+        }
+        float playerFactor=1+0.3*(playerCount-1);
+        float timeFactor=0.046*dv*pow(playerCount,0.2);
+        float stageFactor=pow(1.15,s);
+        float coeff=(playerFactor+st*timeFactor)*stageFactor;
+        
+        cout<<"stage "<<s<<endl;
+        cout<<"time "<<st<<endl;
+        cout<<coeff<<endl;
+        return 0;
+    }
+};
+
+class Stage{
+    public:
+        int stageItems = rand()%6+3;
+        
+}
+
+class Items{
+    public:
+        string name="";
+        int rarity; 
+        float procChance, procCoeff;
+};
+
+class Common: public Items{
+    public:
+        int rarity = 70;
+        int useItem(float procChance, float procCoeff) const{
+            
+        }
+};
+
+int main() {
+    int a, b=0;
+    cin>>a>>b;
+    srand(time(NULL));
+    Difficulty three;
+    three.stageResults(a,b);
+	return 0;
+}
