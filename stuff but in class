@@ -5,9 +5,11 @@
 using namespace std;
 
 class Difficulty{
-    public:
-    int x,s=0,st=0,t;
+    private:
+    int x,s=0,st=0,t;  //s is stage number
     int playerCount, dv;
+    float timeFactor, playerFactor, stageFactor, coeff;
+    public:
     int stageResults(int dv, int playerCount){
         switch(dv){
             case 3:
@@ -15,8 +17,8 @@ class Difficulty{
                 x=rand()%100+1;
                 if(x>40){
                     s++;
-                    t=rand()%10+5;
-                    st+=t;
+                    st=rand()%10+5;
+                    t+=st;
                 }
             }while(x>40);
             break;
@@ -25,8 +27,8 @@ class Difficulty{
                 x=rand()%100+1;
                 if(x>30){
                     s++;
-                    t=rand()%10+5;
-                    st+=t;
+                    st=rand()%10+5;
+                    t+=st;
                 }
             }while(x>30);
             break;
@@ -35,43 +37,50 @@ class Difficulty{
                 x=rand()%100+1;
                 if(x>20){
                     s++;
-                    t=rand()%10+5;
-                    st+=t;
+                    st=rand()%10+5;
+                    t+=st;
                 }
             }while(x>20);
             break;
         }
-        float playerFactor=1+0.3*(playerCount-1);
-        float timeFactor=0.046*dv*pow(playerCount,0.2);
-        float stageFactor=pow(1.15,s);
-        float coeff=(playerFactor+st*timeFactor)*stageFactor;
+        
+        playerFactor=1+0.3*(playerCount-1);
+        timeFactor=0.046*dv*pow(playerCount,0.2);
+        stageFactor=pow(1.15,s);
+        coeff=(playerFactor+t*timeFactor)*stageFactor;
         
         cout<<"stage "<<s<<endl;
-        cout<<"time "<<st<<endl;
+        cout<<"time "<<t<<endl;
         cout<<coeff<<endl;
         return 0;
     }
+    void setplayerCount(int pn) {this->playerCount = pn;}
+    int getplayerCount() const{cout << "playerCount:" << this->playerCount<<endl; return this->playerCount;}
+    void setdv(int dn) {this->dv = dn;}
+    int getdv() const{cout << "dv:" << this->dv<<endl; return this->dv;}
 };
 
-class Stage{
+class Stage: public Difficulty{
     public:
-        int stageItems = rand()%6+3;
+        int dv;
+        int stageItems = rand()%6+3+(dv);
+        int totalItems = totalItems+stageItems;
         
-}
+};
 
 class Items{
     public:
         string name="";
         int rarity; 
         float procChance, procCoeff;
+        int useItem(float procChance, float procCoeff) const{
+            return 0;
+        }
 };
 
 class Common: public Items{
     public:
         int rarity = 70;
-        int useItem(float procChance, float procCoeff) const{
-            
-        }
 };
 
 int main() {
@@ -80,5 +89,9 @@ int main() {
     srand(time(NULL));
     Difficulty three;
     three.stageResults(a,b);
+    three.setplayerCount(b);
+    three.getplayerCount();
+    three.setdv(a);
+    three.getdv();
 	return 0;
 }
