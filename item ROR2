@@ -1,0 +1,21 @@
+#include <iostream>
+#include <cmath>
+#include <algorithm>
+#include <string>
+using namespace std;
+
+srand(time(NULL));
+
+
+
+class item{
+    public:
+    string name="";
+    int rarity,stack#;
+    float procChance,procCoeff,baseChance,perStack;
+    procChance=procCoeff*(baseChance+(perStack*stack#))
+
+
+int main() {
+	return 0;
+}
