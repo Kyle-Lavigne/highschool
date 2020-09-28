@@ -1,0 +1,63 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int x,s=0,st=0,t;
+int playercount,dv;
+float playerfactor,timefactor,stagefactor,coeff;
+ 
+int main() {
+    
+    cin>>dv;
+    cin>>playercount;
+    
+    srand(time(NULL));
+    if(dv==3)
+     {
+        do{
+        x=rand()%100+1;
+        if(x>40)
+            {s++;
+            t=rand()%10+5;
+            st+=t;
+            }
+        }while(x>40);
+    }
+    
+    if(dv==2)
+     {
+        do{
+        x=rand()%100+1;
+        if(x>30)
+            {s++;
+            t=rand()%10+5;
+            st+=t;
+            }
+        }while(x>30);
+    }
+    
+    if(dv==1)
+     {
+        do{
+        x=rand()%100+1;
+        if(x>20)
+            {s++;
+            t=rand()%10+5;
+            st+=t;
+            }
+        }while(x>20);
+    }
+    
+    playerfactor=1+0.3*(playercount-1);
+    timefactor=0.046*dv*pow(playercount,0.2);
+    stagefactor=pow(1.15,s);
+    coeff=(playerfactor+st*timefactor)*stagefactor;
+    
+    
+    
+    cout<<"stage "<<s<<endl;
+    cout<<"time "<<st<<endl;
+    cout<<coeff<<endl;
+    
+	return 0;
+}
