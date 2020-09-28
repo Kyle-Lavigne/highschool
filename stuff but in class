@@ -57,7 +57,7 @@ class Stage{
     public:
         int stageItems = rand()%6+3;
         
-}
+};
 
 class Items{
     public:
