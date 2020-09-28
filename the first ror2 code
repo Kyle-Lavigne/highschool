@@ -1,0 +1,33 @@
+#include <iostream>
+#include <cmath>
+using namespace std;
+
+int playercount,stagescompleted,timeinmin,difficultyvalue;
+int enemylevel,moneycost,basecost;
+float playerfactor,timefactor,stagefactor,coeff;
+    
+int main() {
+    basecost=25;
+    // this is # of players you start with some if one diconnects it still counts 
+    cin>>playercount;
+    // the difficultyvalue is 1 for drizzle      2 for rainstorm and 3 for monsoon
+    cin>>difficultyvalue;
+    // the # of stages completed this includes a moment,fratured and gilded coast
+    cin>>stagescompleted;
+    // time you have been in the run but in minutes
+    cin>>timeinmin;
+    
+    
+    playerfactor=1+0.3*(playercount-1);
+    timefactor=0.046*difficultyvalue*pow(playercount,0.2);
+    stagefactor=pow(1.15,stagescompleted);
+    coeff=(playerfactor+timeinmin*timefactor)*stagefactor;
+    cout<<"the coeff is "<<coeff<<endl;
+    
+    enemylevel=1+(coeff-playerfactor)/0.33;
+    cout<<"the enemylevel is "<<enemylevel<<endl;
+    
+    moneycost=basecost*pow(coeff,1.25);
+    cout<<"the moneycost will be "<<moneycost<<endl;
+	return 0;
+}
